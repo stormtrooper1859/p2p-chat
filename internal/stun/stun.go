@@ -92,10 +92,11 @@ func SendIndication(conn *net.UDPConn) {
 	data := getIndicationData()
 	for {
 		_, err := conn.WriteToUDP(data, stunServerAddr)
+		// fmt.Fprintln(os.Stderr, "indication sended")
 		if err != nil {
 			fmt.Printf("SendIndication WriteToUDP error  %v", err)
 			return
 		}
-		time.Sleep(250 * time.Millisecond)
+		time.Sleep(120 * time.Millisecond)
 	}
 }

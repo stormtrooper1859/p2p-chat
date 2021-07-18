@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"flag"
 	"fmt"
 	"net"
 	"os"
@@ -14,11 +15,14 @@ var (
 	ser     *net.UDPConn
 	dst     *net.UDPAddr
 	chclose = make(chan struct{})
+	pr      = flag.Int("port", 12345, "port")
 )
 
 func main() {
+	flag.Parse()
 	addr := net.UDPAddr{
-		// IP: net.ParseIP("0.0.0.0"),
+		Port: *pr,
+		IP:   net.ParseIP("localhost"),
 	}
 
 	var err error
@@ -51,6 +55,8 @@ func main() {
 		Port: p2,
 		IP:   net.ParseIP(ip2),
 	}
+
+	fmt.Println("parsed dist: ", dst.String())
 
 	go sender()
 	go reciever()

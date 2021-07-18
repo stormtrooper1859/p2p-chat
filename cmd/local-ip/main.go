@@ -20,4 +20,7 @@ func main() {
 
 	ip, port := stun.GetIP(ser)
 	fmt.Printf("%s:%d\n", ip.String(), port)
+
+	ip, port = stun.GetIP(ser)
+	fmt.Printf("%s:%d\n", ip.String(), port)
 }
